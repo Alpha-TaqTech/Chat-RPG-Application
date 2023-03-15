@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      VITE_REACT_APP_API_URL: api-rpg
+      VITE_REACT_APP_API_URL: http://localhost:5000
       VITE_PROJECT_NAME: Chat RPG
     ports:
       - 8080:80

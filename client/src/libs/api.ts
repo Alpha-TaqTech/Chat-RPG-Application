@@ -5,7 +5,7 @@ export const apiJSON = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: "http://api-rpg:5000",
+  baseURL: import.meta.env.VITE_REACT_APP_API_URL,
   withCredentials: false,
   headers: { 'Access-Control-Allow-Origin': '*' },
 });

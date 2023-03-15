@@ -14,7 +14,7 @@ interface TextInputProps{
   placeholder?: string;
   label: string;
   lightLabel?: boolean;
-
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 interface TextAreaInputProps extends TextAreaProps {
@@ -26,11 +26,11 @@ interface SelectInputProps {
   options: { name: string }[];
 }
 
-export const TextInput = ({ type, label, placeholder, lightLabel }: TextInputProps) => {
+export const TextInput = ({ type, label, placeholder, lightLabel, onChange }: TextInputProps) => {
   return (
     <TextInputWrapper>
       <Label light={lightLabel}>{label}</Label>
-      <TextField type={type} placeholder={placeholder} />
+      <TextField type={type} placeholder={placeholder} onChange={onChange} />
     </TextInputWrapper>
   );
 };
