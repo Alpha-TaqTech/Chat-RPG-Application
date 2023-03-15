@@ -5,7 +5,7 @@ export const FeedStyle = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 90%;
+  width: 100%;
   height: 100%;
 
   padding: 20px 0 0 0;

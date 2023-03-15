@@ -9,12 +9,12 @@ import {
   SelectWrapper,
 } from './inputs-components.styled';
 
-interface TextInputProps{
+interface TextInputProps {
   type?: 'text' | 'password' | 'email';
   placeholder?: string;
-  label: string;
+  label?: string;
   lightLabel?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface TextAreaInputProps extends TextAreaProps {
@@ -23,10 +23,17 @@ interface TextAreaInputProps extends TextAreaProps {
 }
 
 interface SelectInputProps {
-  options: { name: string }[];
+  options: string[];
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const TextInput = ({ type, label, placeholder, lightLabel, onChange }: TextInputProps) => {
+export const TextInput = ({
+  type,
+  label,
+  placeholder,
+  lightLabel,
+  onChange,
+}: TextInputProps) => {
   return (
     <TextInputWrapper>
       <Label light={lightLabel}>{label}</Label>
@@ -35,7 +42,12 @@ export const TextInput = ({ type, label, placeholder, lightLabel, onChange }: Te
   );
 };
 
-export const TextAreaInput = ({ label, height, width, lightLabel }: TextAreaInputProps) => {
+export const TextAreaInput = ({
+  label,
+  height,
+  width,
+  lightLabel,
+}: TextAreaInputProps) => {
   return (
     <TextInputWrapper>
       <Label light={lightLabel}>{label}</Label>
@@ -44,15 +56,14 @@ export const TextAreaInput = ({ label, height, width, lightLabel }: TextAreaInpu
   );
 };
 
-export const SelectInput = ({ options }: SelectInputProps) => {
-
+export const SelectInput = ({ options, onChange }: SelectInputProps) => {
   return (
     <SelectWrapper>
-      <SelectStyled>
+      <SelectStyled onChange={onChange}>
         {options.map((element, index) => {
           return (
-            <option key={index} value={element.name}>
-              {element.name}
+            <option key={index} value={element}>
+              {element}
             </option>
           );
         })}
