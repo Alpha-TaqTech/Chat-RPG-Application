@@ -87,16 +87,46 @@ class WebSocketInitializer {
 
       ws.on('close', async () => {
         this.websocketClients.delete(clientId);
+        for (let [key, value] of this.userClients) {
+          if (value === clientId) {
+            this.userClients.delete(key);
+          }
+        }
+        for (let [key, value] of this.roomClients) {
+          const filteredClients = value.filter((element) => element !== clientId);
+          this.roomClients.set(key, filteredClients);
+        }
+
         console.log(`Client closed ${clientId}`);
       });
 
       ws.on('disconnect', async () => {
         this.websocketClients.delete(clientId);
+        for (let [key, value] of this.userClients) {
+          if (value === clientId) {
+            this.userClients.delete(key);
+          }
+        }
+        for (let [key, value] of this.roomClients) {
+          const filteredClients = value.filter((element) => element !== clientId);
+          this.roomClients.set(key, filteredClients);
+        }
+
         console.log(`Client disconnected ${clientId}`);
       });
 
       ws.on('error', () => {
         this.websocketClients.delete(clientId);
+        for (let [key, value] of this.userClients) {
+          if (value === clientId) {
+            this.userClients.delete(key);
+          }
+        }
+        for (let [key, value] of this.roomClients) {
+          const filteredClients = value.filter((element) => element !== clientId);
+          this.roomClients.set(key, filteredClients);
+        }
+
         console.log(`Client error ${clientId}`);
       });
     });
